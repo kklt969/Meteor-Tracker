@@ -1,0 +1,143 @@
+body {
+    font-family: 'Arial', sans-serif;
+    line-height: 1.6;
+    margin: 0;
+    padding: 0; 
+    background: url('space-background.jpg') no-repeat center center fixed; 
+    background-size: cover; 
+    color: yellow;
+    display: flex;
+    flex-direction: column; 
+    min-height: 100vh; 
+}
+
+header {
+    text-align: center;
+    margin-bottom: 30px;
+    background-color: rgba(0, 0, 0, 0.7);
+    padding: 20px;
+    border-radius: 10px;
+}
+
+h1, h2, h3, p {
+    text-shadow: 0 0 5px rgba(255, 255, 0, 0.7), 0 0 10px rgba(255, 255, 0, 0.5), 0 0 15px rgba(255, 255, 0, 0.3);
+    margin: 0;
+}
+
+.team {
+    display: flex;
+    justify-content: center; 
+    flex-wrap: wrap;
+    margin: 20px 0;
+    flex-grow: 1; 
+}
+
+.member {
+    position: relative;
+    width: 200px; /* Width for the member box */
+    overflow: hidden; /* Hide overflow */
+    margin: 10px;
+    background-color: rgba(0, 0, 0, 0.7);
+    border-radius: 10px;
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.member img {
+    width: 100%; /* Fill the entire box */
+    height: 100%; /* Make height 100% to fill the box */
+    object-fit: cover; /* Ensure the aspect ratio is maintained while covering the box */
+    border-radius: 10px; /* Rounded corners */
+    transition: transform 0.3s ease; /* Scale effect */
+}
+
+.member:hover img {
+    transform: scale(1.05); /* Zoom effect on hover */
+}
+
+.info {
+    position: absolute;
+    bottom: -100%; /* Start hidden */
+    left: 0;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.8);
+    color: yellow;
+    text-align: center;
+    transition: bottom 0.3s ease; /* Transition for the pop-up effect */
+    padding: 10px;
+    border-radius: 10px 10px 0 0; /* Rounded corners on top */
+}
+
+.member:hover .info {
+    bottom: 0; /* Slide up to reveal */
+}
+
+.discord-logo {
+    display: block; /* Center the logo */
+    margin: 10px auto; /* Center it */
+    width: 16px; /* Set to the smallest size */
+    height: 16px; /* Maintain aspect ratio */
+    transition: transform 0.3s; /* Add hover effect */
+    background-color: transparent; /* Ensure background is transparent */
+}
+
+.discord-logo:hover {
+    transform: scale(1.1); /* Slightly enlarge on hover */
+}
+
+.go-back {
+    text-align: center;
+    margin: 20px 0; /* Space around the button */
+}
+
+.button {
+    display: inline-block;
+    background-color: rgba(0, 0, 0, 0.8);
+    color: yellow;
+    padding: 10px 20px;
+    border-radius: 5px;
+    text-decoration: none;
+    transition: background-color 0.3s;
+}
+
+.button:hover {
+    background-color: rgba(255, 255, 0, 0.7); /* Change color on hover */
+}
+
+footer {
+    text-align: center;
+    background-color: rgba(0, 0, 0, 0.7);
+    padding: 20px;
+}
+
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgba(0, 0, 0, 0.8); /* Black w/ opacity */
+}
+
+.modal-content {
+    background-color: #fefefe; /* White background */
+    margin: auto; /* Center modal */
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%; /* Width of the modal */
+    max-width: 600px; /* Max width */
+    color: black;
+    position: relative; /* Ensure it can be properly centered */
+    top: 50%; /* Move down by 50% */
+    transform: translateY(-50%); /* Pull it back up by half its height */
+}
+
+
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    cursor: pointer;
+}

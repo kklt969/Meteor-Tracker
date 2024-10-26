@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Select a Date</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Space+Mono:wght@700&display=swap" rel="stylesheet">
+    <style>
+        /* Reset margin and padding */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Roboto', sans-serif;
+        }
+
+        /* Video Background */
+        .video-background {
+            position: relative;
+            width: 100%;
+            overflow: hidden;
+        }
+
+        .video-background video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: brightness(50%);
+            z-index: -1;
+        }
+
+        /* Overlay Styling */
+        .overlay {
+            position: relative;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            color: #ffffff;
+            background: rgba(0, 0, 0, 0.7);
+            padding: 20px;
+            width: 100%;
+        }
+
+        /* Form and Filter Styles */
+        .overlay h1 {
+            font-size: 2.8rem;
+            font-family: 'Space Mono', monospace;
+            font-weight: 700;
+            color: #ffa726;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.6);
+            margin-bottom: 20px;
+        }
+
+        .filter-options, #dateForm {
+            margin-top: 20px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            justify-content: center;
+            align-items: center;
+            color: #ffcc80;
+        }
+
+        .filter-options select, .filter-options button, #dateForm input {
+            padding: 10px;
+            font-size: 1rem;
+            border-radius: 5px;
+            border: 1px solid #ffa726;
+            background-color: #1e1e1e;
+            color: #ffa726;
+            transition: 0.3s;
+        }
+
+        .filter-options select:hover, .filter-options button:hover, #dateForm input:hover {
+            background-color: #ffa726;
+            color: #1e1e1e;
+        }
+
+        .button {
+            color: #ffffff;
+            background-color: #fb8c00;
+            padding: 12px 25px;
+            border-radius: 5px;
+            transition: background-color 0.3s, transform 0.3s;
+            font-family: 'Space Mono', monospace;
+            text-decoration: none;
+        }
+
+        .button:hover {
+            background-color: #ff7043;
+            transform: scale(1.05);
+        }
+
+        /* Results Styling */
+        .result-container {
+            margin-top: 30px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: center;
+            padding: 20px; /* Add padding for spacing */
+            width: 100%;
+        }
+
+        .meteor-card {
+            background: rgba(30, 30, 30, 0.9);
+            color: #ffcc80;
+            padding: 20px;
+            border-radius: 8px;
+            width: 220px;
+            text-align: center;
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.5);
+            transition: transform 0.2s;
+        }
+
+        .meteor-card:hover {
+            transform: scale(1.05);
+        }
+
+        .meteor-card h3 {
+            font-size: 1.5rem;
+            font-family: 'Space Mono', monospace;
+            color: #ffa726;
+            margin-bottom: 10px;
+        }
+
+        .meteor-card p {
+            font-size: 0.95rem;
+            line-height: 1.4;
+        }
+        .navigation-buttons .button {
+            color: #ffffff;
+            background-color: #fb8c00; /* Consistent with your existing button style */
+            padding: 12px 25px;
+            border-radius: 5px;
+            transition: background-color 0.3s, transform 0.3s;
+            font-family: 'Space Mono', monospace;
+            text-decoration: none; /* Remove underline from links */
+            text-align: center; /* Center text in the button */
+        }
+    
+        .navigation-buttons .button:hover {
+            background-color: #ff7043; /* Hover effect */
+            transform: scale(1.05);
+        }
+
+        /* Responsive Adjustments */
+        @media (max-width: 768px) {
+            .meteor-card {
+                width: 90%;
+            }
+            .overlay h1 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="video-background">
+        <video autoplay muted loop>
+            <source src="9341591-uhd_3840_2160_24fps.mp4" type="video/mp4">
+            Your browser does not support HTML5 video.
+        </video>
+        <div class="overlay">
+            <h1>Select a Date and we will show you the incoming meteors within one week</h1>
+            <form id="dateForm">
+                <label for="dateInput">Select Date:</label><br>
+                <input type="date" id="dateInput" name="dateInput" required>
+                <button type="submit" class="button">Submit Date</button>
+            </form>
+            <!-- Filter Options -->
+            <div class="filter-options" id="filters" style="display: none;">
+                <label for="approachFilter">Closest Approach:</label>
+                <select id="approachFilter">
+                    <option value="all">All</option>
+                    <option value="near">Near</option>
+                    <option value="far">Far</option>
+                </select>
+                <label for="hazardFilter">Hazardous:</label>
+                <select id="hazardFilter">
+                    <option value="all">All</option>
+                    <option value="yes">Yes</option>
+                    <option value="no">No</option>
+                </select>
+                <label for="velocityFilter">Average Velocity:</label>
+                <select id="velocityFilter">
+                    <option value="all">All</option>
+                    <option value="slow">Slow</option>
+                    <option value="moderate">Moderate</option>
+                    <option value="fast">Fast</option>
+                </select>
+                <label for="diameterFilter">Diameter:</label>
+                <select id="diameterFilter">
+                    <option value="all">All</option>
+                    <option value="small">Small</option>
+                    <option value="medium">Medium</option>
+                    <option value="large">Large</option>
+                </select>
+                <button id="applyFilters" class="button">Apply Filters</button>
+            </div>
+            <!-- Results Display -->
+            <div id="result" class="result-container"></div>
+            <div class="navigation-buttons" style="margin-top: 20px;">
+                <a href="index(1).html" class="button">Back to Home</a>
+                <a href="about_us.html" class="button">About Us</a>
+                <a href="https://discord.com/oauth2/authorize?client_id=1299470076189212753" target = "_blank" class="button">Try out Spaceship battle game</a>
+            </div>
+        </div>
+    </div>
+   
+    <script>
+        let fetchedData = []; // Store fetched data for filtering
+
+        // Event listener for date form submission
+        document.getElementById("dateForm").addEventListener("submit", function(event) {
+            event.preventDefault();
+            const startDateInput = document.getElementById("dateInput").value;
+            if (!startDateInput) {
+                alert("Please select a start date.");
+                return;
+            }
+            const startDate = new Date(startDateInput);
+            const endDate = new Date(startDate);
+            endDate.setDate(startDate.getDate() + 6); // Add 6 days to make it a 7-day range
+            const formattedStartDate = startDate.toISOString().split('T')[0];
+            const formattedEndDate = endDate.toISOString().split('T')[0];
+            
+            console.log(`Formatted Dates - Start: ${formattedStartDate}, End: ${formattedEndDate}`);
+
+            // Fetch data from the API
+            fetch(`http://localhost:8080/api/trackers/searchByDate`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                body: `startDate=${formattedStartDate}&endDate=${formattedEndDate}`
+            })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error(`Error: ${response.statusText}`);
+                }
+                return response.text(); // Get response as text first
+            })
+            .then(text => {
+                console.log("Raw Response:", text); // Log the raw response for debugging
+                return JSON.parse(text); // Parse it as JSON
+            })
+            .then(data => {
+                fetchedData = data;
+                displayResults(data);
+                document.getElementById("filters").style.display = "block"; // Show filters after data load
+            })
+            .catch(error => {
+                console.error("Error fetching data:", error);
+                document.getElementById("result").innerHTML = "<p>Could not fetch data. Please try again later.</p>";
+            });
+        });
+
+        // Event listener for applying filters
+        document.getElementById("applyFilters").addEventListener("click", function() {
+            let filteredData = fetchedData;
+            const approachFilter = document.getElementById("approachFilter").value;
+            const hazardFilter = document.getElementById("hazardFilter").value;
+            const velocityFilter = document.getElementById("velocityFilter").value;
+            const diameterFilter = document.getElementById("diameterFilter").value;
+
+            // Filtering logic
+            if (hazardFilter !== "all") {
+                filteredData = filteredData.filter(meteor => meteor.is_potentially_hazardous === (hazardFilter === "yes"));
+            }
+            if (approachFilter !== "all") {
+                filteredData = filteredData.filter(meteor => meteor.approach === approachFilter);
+            }
+            if (velocityFilter !== "all") {
+                filteredData = filteredData.filter(meteor => {
+                    if (velocityFilter === "slow") return meteor.velocity_kmh < 20000;
+                    if (velocityFilter === "moderate") return meteor.velocity_kmh >= 20000 && meteor.velocity_kmh < 50000;
+                    if (velocityFilter === "fast") return meteor.velocity_kmh >= 50000;
+                });
+            }
+            if (diameterFilter !== "all") {
+                filteredData = filteredData.filter(meteor => {
+                    if (diameterFilter === "small") return meteor.diameter_km < 0.5;
+                    if (diameterFilter === "medium") return meteor.diameter_km >= 0.5 && meteor.diameter_km < 2.0;
+                    if (diameterFilter === "large") return meteor.diameter_km >= 2.0;
+                });
+            }
+            displayResults(filteredData);
+        });
+
+        // Function to display results
+        function displayResults(data) {
+            const resultContainer = document.getElementById("result");
+            resultContainer.innerHTML = "";
+            if (data.length === 0) {
+                resultContainer.innerHTML = "<p>No meteors found for the selected date and filters.</p>";
+                return;
+            }
+            data.forEach(meteor => {
+                const meteorDiv = document.createElement("div");
+                meteorDiv.className = "meteor-card";
+                meteorDiv.innerHTML = `
+                    <h3>${meteor.name}</h3>
+                    <p>Closest Approach: ${meteor.close_approach_date || "N/A"}</p>
+                    
+                    <p>Average Velocity: ${meteor.velocity_kmh || "Unknown"} km/h</p>
+                    <p>Diameter: ${meteor.diameter_km || "Unknown"} km</p>
+                    <p>Missed Distance: ${meteor.miss_distance_km || "Unknown"} km</p>
+                `;
+                resultContainer.appendChild(meteorDiv);
+            });
+        }
+    </script>
+</body>
+</html>

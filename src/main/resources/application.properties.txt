@@ -1,0 +1,6 @@
+spring.application.name=MeteorTrackerApp
+
+logging.level.root=INFO
+logging.level.org.springframework=DEBUG
+logging.file.name=/path/to/log/file.log
+logging.file.path=/path/to/logs

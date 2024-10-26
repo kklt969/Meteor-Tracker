@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Meteor Tracker</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&family=Poppins:wght@300;600&display=swap" rel="stylesheet">
+    <style>
+        /* Reset and basic styling */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        /* Background video styling */
+        .video-background {
+            position: relative;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        .video-background video {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transform: translate(-50%, -50%);
+            filter: brightness(0.6);
+        }
+
+        /* Overlay for text and button */
+        .overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            background-color: rgba(0, 0, 0, 0.5);
+        }
+
+        /* Title styling */
+        .overlay h1 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 3rem;
+            color: #ffcc80;
+            text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.8);
+            margin-bottom: 20px;
+            animation: fadeIn 1.5s ease-in-out;
+        }
+
+        /* Button styling */
+        .button {
+            font-family: 'Raleway', sans-serif;
+            font-weight: 600;
+            font-size: 1.2rem;
+            padding: 15px 30px;
+            color: #ffffff;
+            background-color: #fb8c00;
+            text-decoration: none;
+            border-radius: 8px;
+            transition: background-color 0.3s, transform 0.3s;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+            animation: fadeIn 2s ease-in-out;
+            letter-spacing: 0.05em;
+        }
+
+        .button:hover {
+            background-color: #ff7043;
+            transform: scale(1.05);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.4);
+        }
+
+        /* Keyframes for fade-in animation */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        /* Responsive text adjustments */
+        @media (max-width: 768px) {
+            .overlay h1 {
+                font-size: 2.5rem;
+            }
+            .button {
+                font-size: 1rem;
+                padding: 12px 25px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .overlay h1 {
+                font-size: 2rem;
+                padding: 0 10px;
+            }
+            .button {
+                font-size: 0.9rem;
+                padding: 10px 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="video-background">
+        <video autoplay muted loop>
+            <source src="60700-495934974.mp4" type="video/mp4">
+            <source src="background.webm" type="video/webm">
+            <source src="background.ogg" type="video/ogg">
+            Your browser does not support HTML5 video.
+        </video>
+        <div class="overlay">
+            <h1>It's all about meteors.</h1>
+            <a href="start.html" class="button">Click here to check out the incoming meteors</a>
+        </div>
+    </div>
+</body>
+</html>
