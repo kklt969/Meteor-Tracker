@@ -1,3 +1,12 @@
+Main files - src/main/  and src/main/resoruces/static
+
+run springboot in src/main/java/com/MeteorTracker app (main)
+
+start the webpage by running index.html  (src/main/resoruces/static)
+
+scroll below for more informations
+
+
 ## Installation
 
 ### Prerequisites
